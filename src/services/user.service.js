@@ -39,18 +39,6 @@ const createUser = async (userData) => {
 };
 
 
-const findUserById=async(userId)=>{
-    try {
-        const user = await User.findById(userId);
-        if(!user){
-            throw new Error("user not found with id : ",userId)
-        }
-        return user;
-    } catch (error) {
-        // console.log("error :------- ",error.message)
-        throw new Error(error.message)
-    }
-}
 
 const getUserByEmail=async(email)=>{
     try {
@@ -85,26 +73,30 @@ const getUserByMobile=async(mobile)=>{
     }
 }
 
-const getUserProfileByToken=async(token)=>{
+const findUserById = async (userId) => {
     try {
-
-        const userId=jwtProvider.getUserIdFromToken(token)
-
-        // console.log("userr id ",userId)
-
-
-        const user= (await findUserById(userId))
-        .populate("addresses");
-        user.password=null;
-        
-        if(!user){
-            throw new Error("user not exist with id : ",userId)
+        // Exclude the password field and populate addresses
+        const user = await User.findById(userId).select('-password').populate("addresses").exec();
+        if (!user) {
+            throw new Error("User not found with id: " + userId);
         }
         return user;
     } catch (error) {
-        // console.log("error ----- ",error.message)
-        
-        throw new Error(error.message)
+        throw new Error(error.message);
+    }
+}
+
+const getUserProfileByToken = async (token) => {
+    try {
+        const userId = jwtProvider.getUserIdFromToken(token);
+        // Use findUserById to get the user without password and with populated addresses
+        const user = await findUserById(userId);
+        if (!user) {
+            throw new Error("User does not exist with id: " + userId);
+        }
+        return user;
+    } catch (error) {
+        throw new Error(error.message);
     }
 }
 
