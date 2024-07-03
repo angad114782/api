@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
-
 const cors = require('cors');
+
 const app = express();
 
 app.use(express.json());
@@ -20,5 +20,7 @@ app.use('/api/users', userRouters);
 const resetRouters = require('./routes/reset.routes.js');
 app.use('/api/reset', resetRouters);
 
+const documentRouters = require('./routes/document.router.js');
+app.use('/api/documents', documentRouters);
 
 module.exports = app;
