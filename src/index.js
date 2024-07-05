@@ -23,4 +23,9 @@ app.use('/api/reset', resetRouters);
 const documentRouters = require('./routes/document.router.js');
 app.use('/api/documents', documentRouters);
 
+app.use((req, res, next) => {
+    console.log(`Received request for: ${req.url}`);
+    next();
+});
+
 module.exports = app;

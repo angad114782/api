@@ -17,6 +17,10 @@ const createDocument = async (req, res) => {
 
     const document = await documentService.createDocument(documentData);
 
+    console.log('Received request to create document');
+    console.log('Body:', req.body);
+    console.log('Files:', req.files);
+
     res.status(201).json(document);
   } catch (error) {
     res.status(400).json({ error: error.message });
