@@ -15,7 +15,7 @@ const authRouters = require('./routes/auth.routes.js');
 app.use('/auth', authRouters);
 
 const userRouters = require('./routes/user.routes.js');
-app.use('/api/user', userRouters);
+app.use('/api/users', userRouters);
 
 const resetRouters = require('./routes/reset.routes.js');
 app.use('/api/reset', resetRouters);
