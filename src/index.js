@@ -23,6 +23,21 @@ app.use('/api/reset', resetRouters);
 const documentRouters = require('./routes/document.router.js');
 app.use('/api/docs', documentRouters);
 
+const engineRouters = require('./routes/engine.router.js');
+app.use('/api/engines', engineRouters);
+
+const testDriveRouters = require('./routes/testDrive.router.js');
+app.use('/api/testDrives', testDriveRouters);
+
+const featuresRouters = require('./routes/features.router.js');
+app.use('/api/features', featuresRouters);
+
+const acRouters = require('./routes/ac.router.js');
+app.use('/api/ac', acRouters);
+
+const exteriorRouters = require('./routes/exterior.router.js');
+app.use('/api/exteriors', exteriorRouters);
+
 app.use((req, res, next) => {
     console.log(`Received request for: ${req.url}`);
     next();
