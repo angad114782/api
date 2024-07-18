@@ -38,6 +38,9 @@ app.use('/api/ac', acRouters);
 const exteriorRouters = require('./routes/exterior.router.js');
 app.use('/api/exteriors', exteriorRouters);
 
+const interiorRouters = require('./routes/interior.router.js');
+app.use('/api/interiors', interiorRouters);
+
 app.use((req, res, next) => {
     console.log(`Received request for: ${req.url}`);
     next();
